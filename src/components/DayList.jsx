@@ -1,6 +1,5 @@
 import React from "react";
 import DayListItem from "./DayListItem";
-import classNames from "classnames";
 
 const DayList = (props) => {
   const days = props.days;

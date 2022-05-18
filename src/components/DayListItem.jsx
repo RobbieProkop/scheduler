@@ -1,5 +1,5 @@
 import React from "react";
-import "components/DayListItem.scss";
+import "../styles/DayListItem.scss";
 import classNames from "classnames";
 
 const formatSpots = (spots) => {
@@ -10,11 +10,11 @@ const formatSpots = (spots) => {
 };
 
 const DayListItem = (props) => {
-  const { name, selected, full, spots, setDay } = props;
+  const { name, selected, spots, setDay } = props;
   const dayClass = classNames(
     "day-list__item",
-    { "day-list__item-selected": selected },
-    { "day-list__item-full": full }
+    { "day-list__item--selected": selected },
+    { "day-list__item--full": spots === 0 }
   );
 
   return (

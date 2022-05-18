@@ -3,7 +3,7 @@ import "../styles/InterviewerListItem.scss";
 import classNames from "classnames";
 
 const InterviewerListItem = (props) => {
-  const { id, name, avatar, selected, setInterviewer } = props;
+  const { name, avatar, selected, setInterviewer } = props;
   const interviewerClass = classNames("interviewers__item", {
     "interviewers__item--selected": selected,
   });
@@ -11,7 +11,7 @@ const InterviewerListItem = (props) => {
   return (
     <li
       selected={selected}
-      onClick={() => setInterviewer(id)}
+      onClick={setInterviewer}
       className={interviewerClass}
     >
       <img className="interviewers__item-image" src={avatar} alt={name} />

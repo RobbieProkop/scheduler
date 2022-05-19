@@ -8,6 +8,10 @@ const Form = (props) => {
   const [student, setStudent] = useState(props.student || "");
   const [interviewer, setInterviewer] = useState(props.interviewer || null);
 
+  const reset = () => {
+    return setStudent(""), setInterviewer(null);
+  };
+
   return (
     <main className="appointment__card appointment__card--create">
       <section className="appointment__card-left">
@@ -19,6 +23,7 @@ const Form = (props) => {
             placeholder="Enter Student Name"
             value={student}
             onChange={(e) => setStudent(e.target.value)}
+            onCancel={onCancel}
 
             /*
           This must be a controlled component
@@ -30,7 +35,7 @@ const Form = (props) => {
       </section>
       <section className="appointment__card-right">
         <section className="appointment__actions">
-          <Button danger onClick={onCancel}>
+          <Button danger onClick={(onCancel, reset)}>
             Cancel
           </Button>
           <Button confirm onClick={onSave}>

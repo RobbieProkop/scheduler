@@ -1,6 +1,4 @@
-import React from "react";
-
-const getAppointmentsForDay = (state, day) => {
+export const getAppointmentsForDay = (state, day) => {
   const daysObj = state.days.filter((item) => item.name === day);
   const newArr = [];
   if (daysObj.length > 0) {
@@ -11,4 +9,4 @@ const getAppointmentsForDay = (state, day) => {
   return newArr;
 };
 
-export { getAppointmentsForDay };
+// export const getInterview = (state, interview) => {};

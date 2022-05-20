@@ -9,13 +9,23 @@ const Form = (props) => {
   const [interviewer, setInterviewer] = useState(props.interviewer || null);
 
   const reset = () => {
-    return setStudent(""), setInterviewer(null);
+    return setStudent(""), setInterviewer(null), onCancel();
+  };
+
+  const save = () => {
+    return onSave(student, interviewer);
   };
 
   return (
     <main className="appointment__card appointment__card--create">
       <section className="appointment__card-left">
-        <form autoComplete="off">
+        <form
+          autoComplete="off"
+          onSubmit={(e) => {
+            e.preventDefault();
+            onSave(student);
+          }}
+        >
           <input
             className="appointment__create-input text--semi-bold"
             name="name"
@@ -24,21 +34,20 @@ const Form = (props) => {
             value={student}
             onChange={(e) => setStudent(e.target.value)}
             onCancel={onCancel}
-
-            /*
-          This must be a controlled component
-          your code goes here
-        */
           />
         </form>
-        <InterviewerList value={interviewer} onChange={setInterviewer} />
+        <InterviewerList
+          value={interviewer}
+          onChange={setInterviewer}
+          interviewers={interviewers}
+        />
       </section>
       <section className="appointment__card-right">
         <section className="appointment__actions">
-          <Button danger onClick={(onCancel, reset)}>
+          <Button danger onClick={reset}>
             Cancel
           </Button>
-          <Button confirm onClick={onSave}>
+          <Button confirm onClick={save}>
             Save
           </Button>
         </section>

@@ -5,18 +5,13 @@ import Header from "./Header";
 import Show from "./Show";
 import Form from "./Form";
 import { useVisualMode } from "hooks/useVisualMode";
-import { getInterviewersForDay } from "helpers/selectors";
 
 const EMPTY = "EMPTY";
 const SHOW = "SHOW";
 const CREATE = "CREATE";
 
 const Appointment = ({ time, interview, interviewers }) => {
-  // const { time, interview, interviewers } = props;
-
   const { mode, transition, back } = useVisualMode(interview ? SHOW : EMPTY);
-
-  console.log("props.interview", interview);
 
   return (
     <article className="appointment">

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import DayList from "./DayList";
 import "../styles/Application.scss";
-import InterviewerList from "./InterviewerList";
 import Appointment from "components/Appointment";
 import {
   getAppointmentsForDay,
@@ -42,7 +41,6 @@ export default function Application() {
       axios.get("/api/appointments"),
       axios.get("/api/interviewers"),
     ]).then((all) => {
-      console.log("Application line 77 all", all);
       setState((prev) => ({
         ...prev,
         days: all[0].data,

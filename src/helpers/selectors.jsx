@@ -9,4 +9,11 @@ export const getAppointmentsForDay = (state, day) => {
   return newArr;
 };
 
-// export const getInterview = (state, interview) => {};
+export const getInterview = (state, interview) => {
+  if (!interview) return null;
+  const newObj = {
+    student: interview.student,
+    interviewer: state.interviewers[interview.interviewer],
+  };
+  return newObj;
+};

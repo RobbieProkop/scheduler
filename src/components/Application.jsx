@@ -3,47 +3,8 @@ import DayList from "./DayList";
 import "../styles/Application.scss";
 import InterviewerList from "./InterviewerList";
 import Appointment from "components/Appointment";
-import { getAppointmentsForDay } from "helpers/selectors";
+import { getAppointmentsForDay, getInterview } from "helpers/selectors";
 import axios from "axios";
-
-// const appointments = {
-//   1: {
-//     id: 1,
-//     time: "12pm",
-//   },
-//   2: {
-//     id: 2,
-//     time: "1pm",
-//     interview: {
-//       student: "Lydia Miller-Jones",
-//       interviewer: {
-//         id: 3,
-//         name: "Sylvia Palmer",
-//         avatar: "https://i.imgur.com/LpaY82x.png",
-//       },
-//     },
-//   },
-//   3: {
-//     id: 3,
-//     time: "2pm",
-//   },
-//   4: {
-//     id: 4,
-//     time: "3pm",
-//     interview: {
-//       student: "Archie Andrews",
-//       interviewer: {
-//         id: 4,
-//         name: "Cohana Roy",
-//         avatar: "https://i.imgur.com/FK8V841.jpg",
-//       },
-//     },
-//   },
-//   5: {
-//     id: 5,
-//     time: "4pm",
-//   },
-// };
 
 export default function Application() {
   const [state, setState] = useState({
@@ -57,8 +18,15 @@ export default function Application() {
 
   const dailyAppointments = getAppointmentsForDay(state, state.day);
 
-  const mapped = dailyAppointments.map((appointment) => {
-    return <Appointment key={appointment.id} {...appointment} />;
+  const schedule = dailyAppointments.map((appointment) => {
+    const interview = getInterview(state, appointment.interview);
+    return (
+      <Appointment
+        key={appointment.id}
+        {...appointment}
+        interview={interview}
+      />
+    );
   });
 
   useEffect(() => {
@@ -67,7 +35,7 @@ export default function Application() {
       axios.get("/api/appointments"),
       axios.get("/api/interviewers"),
     ]).then((all) => {
-      console.log("all", all);
+      console.log("Application line 77 all", all);
       setState((prev) => ({
         ...prev,
         days: all[0].data,
@@ -95,7 +63,7 @@ export default function Application() {
         />
       </section>
       <section className="schedule">
-        {mapped}
+        {schedule}
         <Appointment key="last" time="5pm" />
       </section>
     </main>

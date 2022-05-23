@@ -10,15 +10,19 @@ const EMPTY = "EMPTY";
 const SHOW = "SHOW";
 const CREATE = "CREATE";
 
-const Appointment = ({ time, interview, interviewers }) => {
+//setting up an appointment
+const Appointment = ({ id, time, interview, interviewers, bookInterview }) => {
   const { mode, transition, back } = useVisualMode(interview ? SHOW : EMPTY);
 
+  // upon clicking the save button, transition to SHOW interview
   const save = (name, interviewer) => {
     const interview = {
       student: name,
       interviewer,
     };
-    console.log("interview", interview);
+    bookInterview(id, interview)
+      .then(() => transition(SHOW))
+      .catch((error) => console.log(error));
   };
 
   return (

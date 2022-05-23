@@ -4,11 +4,13 @@ import Empty from "./Empty";
 import Header from "./Header";
 import Show from "./Show";
 import Form from "./Form";
+import Status from "./Status";
 import { useVisualMode } from "hooks/useVisualMode";
 
 const EMPTY = "EMPTY";
 const SHOW = "SHOW";
 const CREATE = "CREATE";
+const SAVING = "SAVING";
 
 //setting up an appointment
 const Appointment = ({ id, time, interview, interviewers, bookInterview }) => {
@@ -20,6 +22,7 @@ const Appointment = ({ id, time, interview, interviewers, bookInterview }) => {
       student: name,
       interviewer,
     };
+    transition(SAVING);
     bookInterview(id, interview)
       .then(() => transition(SHOW))
       .catch((error) => console.log(error));
@@ -37,6 +40,7 @@ const Appointment = ({ id, time, interview, interviewers, bookInterview }) => {
         />
       )}
       {mode === SHOW && <Show {...interview} />}
+      {mode === SAVING && <Status />}
       {mode === CREATE && (
         <Form onSave={save} interviewers={interviewers} onCancel={back} />
       )}

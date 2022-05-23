@@ -37,6 +37,21 @@ export default function Application() {
 
   const bookInterview = (id, interview) => {
     console.log(id, interview);
+
+    const appointment = {
+      ...state.appointments[id],
+      interview: { ...interview },
+    };
+
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment,
+    };
+
+    setState({
+      ...state,
+      appointments,
+    });
   };
 
   useEffect(() => {
@@ -53,6 +68,8 @@ export default function Application() {
       }));
     });
   }, []);
+
+  //render content
   return (
     <main className="layout">
       <section className="sidebar">

@@ -39,13 +39,6 @@ export default function Application() {
     console.log(id, interview);
   };
 
-  const save = (name, interviewer) => {
-    const interview = {
-      student: name,
-      interviewer,
-    };
-  };
-
   useEffect(() => {
     Promise.all([
       axios.get("/api/days"),

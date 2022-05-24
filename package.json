@@ -15,7 +15,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --verbose",
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 9009 -s public --ci",
     "build-storybook": "build-storybook -s public"
@@ -44,6 +44,7 @@
     "babel-loader": "^8.0.5",
     "eslint": "^6.8.0",
     "eslint-plugin-react": "^7.30.0",
+    "prop-types": "^15.8.1",
     "react-test-renderer": "^16.9.0",
     "sass": "^1.51.0"
   },

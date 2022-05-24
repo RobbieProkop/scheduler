@@ -52,8 +52,6 @@ const Appointment = ({
       .catch((error) => transition(ERROR_DELETE, true));
   };
 
-  console.log("interview", interview);
-
   return (
     <article className="appointment">
       {time && <Header time={time} />}

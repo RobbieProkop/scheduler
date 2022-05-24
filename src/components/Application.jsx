@@ -19,13 +19,9 @@ export default function Application() {
 
   const setDay = (day) => setState({ ...state, day });
 
+  //Book an Interview
+
   const bookInterview = (id, interview) => {
-    console.log(id, interview);
-
-    // .then(() => setState((prev)=> {
-    //   ...prev
-    // })
-
     const appointment = {
       ...state.appointments[id],
       interview: { ...interview },
@@ -44,6 +40,30 @@ export default function Application() {
     });
   };
 
+  //Delete an interview
+
+  const cancelInterview = (id) => {
+    const appointment = {
+      ...state.appointments[id],
+      interview: null,
+    };
+
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment,
+    };
+
+    return axios
+      .delete(`/api/appointments/${id}`)
+      .then(() => {
+        setState({
+          ...state,
+          appointments,
+        });
+      })
+      .catch((error) => console.log(error));
+  };
+
   const dailyAppointments = getAppointmentsForDay(state, state.day);
   const interviewers = getInterviewersForDay(state, state.day);
 
@@ -57,6 +77,7 @@ export default function Application() {
         interview={interview}
         interviewers={interviewers}
         bookInterview={bookInterview}
+        cancelInterview={cancelInterview}
       />
     );
   });
@@ -66,14 +87,16 @@ export default function Application() {
       axios.get("/api/days"),
       axios.get("/api/appointments"),
       axios.get("/api/interviewers"),
-    ]).then((all) => {
-      setState((prev) => ({
-        ...prev,
-        days: all[0].data,
-        appointments: all[1].data,
-        interviewers: all[2].data,
-      }));
-    });
+    ])
+      .then((all) => {
+        setState((prev) => ({
+          ...prev,
+          days: all[0].data,
+          appointments: all[1].data,
+          interviewers: all[2].data,
+        }));
+      })
+      .catch((error) => console.log(error));
   }, []);
 
   //render content

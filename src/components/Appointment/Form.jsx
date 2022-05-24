@@ -13,6 +13,7 @@ const Form = (props) => {
   };
 
   const save = () => {
+    if (!interviewer) return;
     return onSave(student, interviewer);
   };
 
@@ -23,7 +24,7 @@ const Form = (props) => {
           autoComplete="off"
           onSubmit={(e) => {
             e.preventDefault();
-            onSave(student);
+            onSave(student, interviewer);
           }}
         >
           <input

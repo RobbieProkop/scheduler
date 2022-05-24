@@ -13,7 +13,7 @@ const Form = (props) => {
   };
 
   const save = () => {
-    // if (!interviewer) return;
+    if (!interviewer) return;
     onSave(student, interviewer);
   };
 

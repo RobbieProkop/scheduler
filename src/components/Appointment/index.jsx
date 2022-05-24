@@ -6,6 +6,7 @@ import Show from "./Show";
 import Form from "./Form";
 import Status from "./Status";
 import Confirm from "./Confirm";
+import Error from "./Error";
 import { useVisualMode } from "hooks/useVisualMode";
 
 const EMPTY = "EMPTY";
@@ -15,6 +16,8 @@ const SAVING = "SAVING";
 const DELETING = "DELETING";
 const CONFIRM = "CONFIRM";
 const EDIT = "EDIT";
+const ERROR_DELETE = "ERROR_DELETE";
+const ERROR_SAVE = "ERROR_SAVE";
 
 //setting up an appointment
 const Appointment = ({
@@ -38,15 +41,15 @@ const Appointment = ({
 
     bookInterview(id, interview)
       .then(() => transition(SHOW))
-      .catch((error) => console.log(error));
+      .catch((error) => transition(ERROR_SAVE, true));
   };
 
   //delete the appointment from confirm page
   const deleteInterview = () => {
-    transition(DELETING);
+    transition(DELETING, true);
     cancelInterview(id)
       .then(() => transition(EMPTY))
-      .catch((error) => console.log(error));
+      .catch((error) => transition(ERROR_DELETE, true));
   };
 
   console.log("interview", interview);
@@ -98,6 +101,13 @@ const Appointment = ({
       )}
 
       {mode === DELETING && <Status message="Deleting" />}
+
+      {mode === ERROR_SAVE && (
+        <Error message="Error while saving" onClose={back} />
+      )}
+      {mode === ERROR_DELETE && (
+        <Error message="Error while deleting" onClose={back} />
+      )}
     </article>
   );
 };

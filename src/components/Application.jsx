@@ -12,8 +12,14 @@ import useApplicationData from "./useApplicationData";
 
 export default function Application(props) {
   //import from useApplicationData.jsx
-  const { state, setDay, bookInterview, cancelInterview } =
-    useApplicationData();
+  const {
+    state,
+    setDay,
+    bookInterview,
+    cancelInterview,
+    countSpots,
+    updateSpots,
+  } = useApplicationData();
 
   const interviewers = getInterviewersForDay(state, state.day);
 

@@ -31,7 +31,7 @@ const Appointment = ({
   const save = (name, interviewer) => {
     const interview = {
       student: name,
-      interviewer,
+      interviewer: interviewer.id,
     };
 
     transition(SAVING);
@@ -79,7 +79,13 @@ const Appointment = ({
 
       {/* edit an appointment */}
       {mode === EDIT && (
-        <Form onSave={save} interviewers={interviewers} onCancel={back} />
+        <Form
+          onSave={save}
+          interviewers={interviewers}
+          interviewer={interview.interviewer}
+          student={interview.student}
+          onCancel={back}
+        />
       )}
 
       {/* delete appointment */}

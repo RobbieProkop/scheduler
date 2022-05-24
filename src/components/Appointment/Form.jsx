@@ -13,8 +13,8 @@ const Form = (props) => {
   };
 
   const save = () => {
-    if (!interviewer) return;
-    return onSave(student, interviewer);
+    // if (!interviewer) return;
+    onSave(student, interviewer);
   };
 
   return (
@@ -24,7 +24,7 @@ const Form = (props) => {
           autoComplete="off"
           onSubmit={(e) => {
             e.preventDefault();
-            onSave(student, interviewer);
+            // onSave(student, interviewer);
           }}
         >
           <input
@@ -38,7 +38,7 @@ const Form = (props) => {
           />
         </form>
         <InterviewerList
-          value={interviewer}
+          value={interviewer && interviewer.id}
           onChange={setInterviewer}
           interviewers={interviewers}
         />

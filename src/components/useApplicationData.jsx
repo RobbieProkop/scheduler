@@ -18,16 +18,12 @@ const useApplicationData = () => {
 
   //count null interviews on a specific day using the appointment key
   // need to change the appointments in the day obj
-  const countSpots = (day, appointments) => {
-    const appointmentIDs = day.appointments;
-    const spots = appointmentIDs.filter(
-      (id) => !appointments[id].interview
-    ).length;
-    return spots;
-  };
+
   const updateSpots = (state, appointments) => {
     const dayObj = state.days.find((day) => day.name === state.day);
-    const spots = countSpots(dayObj, appointments);
+    const spots = dayObj.appointments.filter(
+      (id) => !appointments[id].interview
+    ).length;
     const days = state.days.map((d) =>
       d.name === state.day ? { ...dayObj, spots } : d
     );
@@ -99,7 +95,6 @@ const useApplicationData = () => {
     setDay,
     bookInterview,
     cancelInterview,
-    countSpots,
     updateSpots,
   };
 };

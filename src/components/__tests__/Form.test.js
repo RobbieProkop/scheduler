@@ -66,27 +66,72 @@ describe("Form", () => {
     expect(onSave).not.toHaveBeenCalled();
   });
 
-  test("calls onSave function when the name is defined", () => {
+  test("can successfully save after trying to submit an empty student name", () => {
     const onSave = jest.fn();
-    const { getByText, queryByText } = render(
+    const { getByText, getByPlaceholderText, queryByText } = render(
       <Form
         interviewers={interviewers}
-        interviewer={interviewers[0].id}
-        student="Lydia Miller-Jones"
+        interviewer={interviewers[0]}
         onSave={onSave}
       />
     );
+
     fireEvent.click(getByText("Save"));
 
-    /* 5. validation is not shown */
+    expect(getByText(/student name cannot be blank/i)).toBeInTheDocument();
+    expect(onSave).not.toHaveBeenCalled();
+
+    fireEvent.change(getByPlaceholderText("Enter Student Name"), {
+      target: { value: "Lydia Miller-Jones" },
+    });
+
+    fireEvent.click(getByText("Save"));
+
     expect(queryByText(/student name cannot be blank/i)).toBeNull();
-    expect(queryByText(/please select an interviewer/i)).toBeNull();
 
-    /* 6. onSave is called once*/
     expect(onSave).toHaveBeenCalledTimes(1);
-
-    /* 7. onSave is called with the correct arguments */
-    expect(onSave).toHaveBeenCalledWith("Lydia Miller-Jones", 1);
+    expect(onSave).toHaveBeenCalledWith("Lydia Miller-Jones", interviewers[0]);
   });
-  // test("", () => {});
+
+  // test("calls onSave function when the name is defined", () => {
+  //   const onSave = jest.fn();
+  //   const { getByText, queryByText } = render(
+  //     <Form
+  //       interviewers={interviewers}
+  //       interviewer={interviewers[0].id}
+  //       student="Lydia Miller-Jones"
+  //       onSave={onSave}
+  //     />
+  //   );
+  //   fireEvent.click(getByText("Save"));
+
+  //   /* 5. validation is not shown */
+  //   expect(queryByText(/student name cannot be blank/i)).toBeNull();
+  //   expect(queryByText(/please select an interviewer/i)).toBeNull();
+
+  //   /* 6. onSave is called once*/
+  //   expect(onSave).toHaveBeenCalledTimes(1);
+
+  //   /* 7. onSave is called with the correct arguments */
+  //   expect(onSave).toHaveBeenCalledWith("Lydia Miller-Jones", 1);
+  // });
+
+  // test("submits the name entered by the user", () => {
+  //   const onSave = jest.fn();
+  //   const { getByText, getByPlaceholderText } = render(
+  //     <Form
+  //       interviewers={interviewers}
+  //       interviewer={interviewers[0]}
+  //       onSave={onSave}
+  //     />
+  //   );
+
+  //   const input = getByPlaceholderText("Enter Student Name");
+
+  //   fireEvent.change(input, { target: { value: "Lydia Miller-Jones" } });
+  //   fireEvent.click(getByText("Save"));
+
+  //   expect(onSave).toHaveBeenCalledTimes(1);
+  //   expect(onSave).toHaveBeenCalledWith("Lydia Miller-Jones", interviewers[0]);
+  // });
 });

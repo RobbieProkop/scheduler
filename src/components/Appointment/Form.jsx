@@ -16,15 +16,9 @@ const Form = (props) => {
   const save = () => {
     if (!student) return setError("Student name cannot be blank");
     if (!interviewer) return setError("Please select an interviewer");
+    setError("");
     onSave(student, interviewer);
   };
-
-  // const validate = () => {
-  //   if (!interviewer) return setError("Please select an interviewer");
-  //   if (!student) return setError("Student name cannot be blank");
-
-  //   onSave(student, interviewer);
-  // };
 
   return (
     <main className="appointment__card appointment__card--create">

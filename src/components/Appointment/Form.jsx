@@ -12,10 +12,19 @@ const Form = (props) => {
     return setStudent(""), setInterviewer(null), onCancel();
   };
 
+  const [error, setError] = useState("");
   const save = () => {
-    if (!interviewer) return;
+    if (!student) return setError("Student name cannot be blank");
+    if (!interviewer) return setError("Please select an interviewer");
     onSave(student, interviewer);
   };
+
+  // const validate = () => {
+  //   if (!interviewer) return setError("Please select an interviewer");
+  //   if (!student) return setError("Student name cannot be blank");
+
+  //   onSave(student, interviewer);
+  // };
 
   return (
     <main className="appointment__card appointment__card--create">
@@ -38,6 +47,7 @@ const Form = (props) => {
             onCancel={onCancel}
           />
         </form>
+        <section className="appointment__validation">{error}</section>
         <InterviewerList
           value={interviewer && interviewer.id}
           onChange={setInterviewer}
@@ -49,7 +59,7 @@ const Form = (props) => {
           <Button danger onClick={reset}>
             Cancel
           </Button>
-          <Button confirm onClick={save}>
+          <Button confirm onClick={() => save()}>
             Save
           </Button>
         </section>

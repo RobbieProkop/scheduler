@@ -93,45 +93,29 @@ describe("Form", () => {
     expect(onSave).toHaveBeenCalledWith("Lydia Miller-Jones", interviewers[0]);
   });
 
-  // test("calls onSave function when the name is defined", () => {
-  //   const onSave = jest.fn();
-  //   const { getByText, queryByText } = render(
-  //     <Form
-  //       interviewers={interviewers}
-  //       interviewer={interviewers[0].id}
-  //       student="Lydia Miller-Jones"
-  //       onSave={onSave}
-  //     />
-  //   );
-  //   fireEvent.click(getByText("Save"));
+  test("calls onCancel and resets the input field", () => {
+    const onCancel = jest.fn();
+    const { getByText, getByPlaceholderText, queryByText } = render(
+      <Form
+        interviewers={interviewers}
+        student="Lydia Mill-Jones"
+        onSave={jest.fn()}
+        onCancel={onCancel}
+      />
+    );
 
-  //   /* 5. validation is not shown */
-  //   expect(queryByText(/student name cannot be blank/i)).toBeNull();
-  //   expect(queryByText(/please select an interviewer/i)).toBeNull();
+    fireEvent.click(getByText("Save"));
 
-  //   /* 6. onSave is called once*/
-  //   expect(onSave).toHaveBeenCalledTimes(1);
+    fireEvent.change(getByPlaceholderText("Enter Student Name"), {
+      target: { value: "Lydia Miller-Jones" },
+    });
 
-  //   /* 7. onSave is called with the correct arguments */
-  //   expect(onSave).toHaveBeenCalledWith("Lydia Miller-Jones", 1);
-  // });
+    fireEvent.click(getByText("Cancel"));
 
-  // test("submits the name entered by the user", () => {
-  //   const onSave = jest.fn();
-  //   const { getByText, getByPlaceholderText } = render(
-  //     <Form
-  //       interviewers={interviewers}
-  //       interviewer={interviewers[0]}
-  //       onSave={onSave}
-  //     />
-  //   );
+    expect(queryByText(/student name cannot be blank/i)).toBeNull();
 
-  //   const input = getByPlaceholderText("Enter Student Name");
+    expect(getByPlaceholderText("Enter Student Name")).toHaveValue("");
 
-  //   fireEvent.change(input, { target: { value: "Lydia Miller-Jones" } });
-  //   fireEvent.click(getByText("Save"));
-
-  //   expect(onSave).toHaveBeenCalledTimes(1);
-  //   expect(onSave).toHaveBeenCalledWith("Lydia Miller-Jones", interviewers[0]);
-  // });
+    expect(onCancel).toHaveBeenCalledTimes(1);
+  });
 });

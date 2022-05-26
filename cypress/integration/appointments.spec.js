@@ -3,9 +3,6 @@ describe("appointments", () => {
     beforeEach(() => {
       cy.visit("/");
     });
-    // it("should load the webpage", () => {
-    //   cy.visit("/");
-    // });
 
     it("Should check to find Monday is selected", () => {
       cy.contains("[data-testid=day]", "Monday")
@@ -18,7 +15,20 @@ describe("appointments", () => {
     });
 
     it("should add a name to the input field", () => {
-      cy.contains("[data-]");
+      cy.get("[alt=Add]").first().click();
+      cy.get("[data-testid=student-name-input]").type("Robbie Prokop");
+    });
+
+    it("should click on an interviewer to select it", () => {
+      cy.get("[alt=Add]").first().click();
+      cy.get("[alt='Sylvia Palmer']").click();
+    });
+
+    it("should click the save button", () => {
+      cy.get("[alt=Add]").first().click();
+      cy.get("[data-testid=student-name-input]").type("Robbie Prokop");
+      cy.get("[alt='Sylvia Palmer']").click();
+      cy.contains("Save").click();
     });
   });
 });

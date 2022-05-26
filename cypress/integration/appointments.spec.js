@@ -39,7 +39,7 @@ describe("appointments", () => {
       cy.get("[alt=Delete]").first().click({ force: true });
       //clicks the confirm button
       cy.contains("Confirm").click();
-      cy.contains("not.have.class", "appointment__card--show").not();
+      cy.get(".appointment__card--show", "Archie Cohen").should("not.exist");
     });
   });
 });

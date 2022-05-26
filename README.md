@@ -6,9 +6,9 @@ I tried to make the code fairly modularized. A stretch goal of mine would be to 
 
 Built by Robbie Prokop, using a lots of help from the Lighthouse Labs.
 
-["Landing Page"](https://github.com/RobbieProkop/scheduler/blob/master/screenshots/Screen%20Shot%202022-05-26%20at%203.05.55%20PM.png)
-["Add appointment form"](https://github.com/RobbieProkop/scheduler/blob/master/screenshots/Screen%20Shot%202022-05-26%20at%203.06.25%20PM.png)
-["Delete appointment confirmation"](https://github.com/RobbieProkop/scheduler/blob/master/screenshots/Screen%20Shot%202022-05-26%20at%203.07.04%20PM.png)
+<img src="screenshots/Screen%20Shot%202022-05-26%20at%203.05.55%20PM.png" />
+<img src="screenshots/Screen%20Shot%202022-05-26%20at%203.06.25%20PM.png" />
+<img src="screenshots/Screen%20Shot%202022-05-26%20at%203.07.04%20PM.png" />
 
 ## Setup
 

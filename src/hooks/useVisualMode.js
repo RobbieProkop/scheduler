@@ -21,15 +21,3 @@ export const useVisualMode = (initial) => {
 
   return { mode, transition, back };
 };
-
-// const transition = (newValue, replace) => {
-//   setMode(newValue);
-// if (replace) {
-//   return setHistory((prev) => {
-//     const historyCopy = [...prev].slice(0, -1);
-//     historyCopy.push(newValue);
-//     return historyCopy;
-//   });
-// }
-// setHistory((prev) => [...prev, newValue]);
-// };

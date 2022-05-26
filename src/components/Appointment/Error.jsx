@@ -1,5 +1,6 @@
 import React from "react";
 
+//error page, if one occurs
 const Error = (props) => {
   const { message, onClose } = props;
   return (

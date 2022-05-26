@@ -12,6 +12,7 @@ const Form = (props) => {
     return setStudent(""), setInterviewer(null), onCancel();
   };
 
+  //form validtion
   const [error, setError] = useState("");
   const save = () => {
     if (!student) return setError("Student name cannot be blank");
@@ -27,7 +28,8 @@ const Form = (props) => {
           autoComplete="off"
           onSubmit={(e) => {
             e.preventDefault();
-            // onSave(student, interviewer);
+            //saves on enter (when in the input)
+            save();
           }}
         >
           <input

@@ -1,5 +1,6 @@
 import React from "react";
 
+//loading page with spinner
 const Status = (props) => {
   return (
     <main className="appointment__card appointment__card--status">

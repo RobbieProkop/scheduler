@@ -3,9 +3,8 @@ import "../styles/DayListItem.scss";
 import classNames from "classnames";
 
 const formatSpots = (spots) => {
-  if (spots === 1) {
-    return `1 spot`;
-  }
+  if (spots === 1) return `1 spot`;
+
   return `${spots > 1 ? spots : "no"} spots`;
 };
 

@@ -1,8 +1,3 @@
-// need to bring in:
-// State
-// setDay
-// bookInterview
-// cancelInterview
 import axios from "axios";
 import { useState, useEffect } from "react";
 
@@ -17,8 +12,7 @@ const useApplicationData = () => {
   const setDay = (day) => setState({ ...state, day });
 
   //count null interviews on a specific day using the appointment key
-  // need to change the appointments in the day obj
-
+  //dynamically update the spots remaining in the sidebar
   const updateSpots = (state, appointments) => {
     const dayObj = state.days.find((day) => day.name === state.day);
     const spots = dayObj.appointments.filter(

@@ -1,8 +1,8 @@
 import React from "react";
 
+//show the appointment
 const Show = (props) => {
   const { student, interviewer, onEdit, onDelete } = props;
-  // console.log("interviewer", interviewer);
   return (
     <main className="appointment__card appointment__card--show">
       <section className="appointment__card-left">
